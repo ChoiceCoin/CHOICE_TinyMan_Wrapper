@@ -206,7 +206,7 @@ def choice_for_GEMS():
    def choice_for_AKITA():
         Choice = client.fetch_asset(297995609)
         AKITA = client.fetch_asset(384303832)
-        pool = client.fetch_pool(Choice, TACO)
+        pool = client.fetch_pool(Choice, AKITA)
 
         quote = pool.fetch_fixed_input_swap_quote(AKITA(1_000_000), slippage=0.01)
         print(quote)
