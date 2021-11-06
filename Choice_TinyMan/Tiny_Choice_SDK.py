@@ -9,8 +9,8 @@ receiver_passphrase = ""
 from tinyman.v1.client import TinymanTestnetClient
 
 account = {
-    'address': '66PWZ4YF7MT6SRAFESWZ44KA262BLNSH6PTE7CUULPIHMNWYX4ZGPMZJMQ',
-    'private_key': 'excite profit arch either banner movie open tool model must step zone wisdom deal innocent truck test rocket angle glare between dismiss spell able local', 
+    'address': '',
+    'private_key': '', 
     # Use algosdk.mnemonic.to_private_key(mnemonic) if necessary
 }
 
@@ -30,8 +30,8 @@ print(f'Share of pool: {share:.3f}%')
 from tinyman.v1.client import TinymanTestnetClient
 
 account = {
-    'address': '66PWZ4YF7MT6SRAFESWZ44KA262BLNSH6PTE7CUULPIHMNWYX4ZGPMZJMQ',
-    'private_key': 'excite profit arch either banner movie open tool model must step zone wisdom deal innocent truck test rocket angle glare between dismiss spell able local', 
+    'address': '',
+    'private_key': '', 
     # Use algosdk.mnemonic.to_private_key(mnemonic) if necessary
 }
 
