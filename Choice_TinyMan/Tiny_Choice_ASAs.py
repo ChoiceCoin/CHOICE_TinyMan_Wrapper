@@ -5,8 +5,8 @@ from algosdk.v2client import algod
 from algosdk import account, encoding, mnemonic,transaction
 
 print("Welcome to the custom Choice-TinyMan Terminal Wrapper! Please enter your mnemonic and address to sign transactions manually.")
-user_mnemonic = "excite profit arch either banner movie open tool model must step zone wisdom deal innocent truck test rocket angle glare between dismiss spell able local"
-address = "66PWZ4YF7MT6SRAFESWZ44KA262BLNSH6PTE7CUULPIHMNWYX4ZGPMZJMQ"
+user_mnemonic = ""
+address = ""
 
 private_key = mnemonic.to_private_key(user_mnemonic)
 client = TinymanTestnetClient(user_address = address)
