@@ -1,0 +1,45 @@
+# Copyright Fortior Blockchain, LLLP
+
+# Algorand
+##################
+Algorand is a proof-of-stake blockchain, which improves security and power efficiency of blockchain networks. 
+In fact, Algorand is the most technically advanced and sophisticated blockchain technology. 
+The Algorand blockchain utilizes advanced post-quantum cryptographic mechanisms and zeroknowledge proofs (ZKPs). 
+The Algorand network also includes a democratic consensus mechanism for voting, using a new Byzantine Agreement protocol.
+
+# Choice Coin
+##################
+A voting token for autonomous organizations, Choice Coin is built on the Algorand Blockchain as an Algorand Standard Asset (ASA).
+Choice Coin is a digital asset, which is used to solve the decentralized voting problem. 
+The decentralized voting problem refers to a lack of a systemic governance mechansim for decentralized organizations. 
+Choice Coin provides a mechanism by which decentralized organizations can vote securely using post-quantum cryptography. 
+
+# TinyMan
+##################
+Tinyman is a liquidity pool software which supports Algorand Standard Assets (ASA) liquidity pools.
+The software is innovative insofar as it allows users to perform swaps and yield farming with minimal fees.
+As such, TinyMan provides access to small market places, leveling the playing field with institutionized finance.
+TinyMan is a great decentralized finance (DeFi) technology on the Algorand network.
+
+# Liquidity
+##################
+Liquidity pools are accounts holding two different ASAs contributed by poolers.
+In return for providing assets, poolers receive a share of transaction fees.
+Liquidity must be added and withdrawn in ASA pairs.
+In exchange for providing liquidity, poolers receive pool tokens.
+Pool tokens can be withdrawn at anytime for the proportional representation of the pool.
+
+# Swaps
+##################
+A swap is an ASA transfer to or from a liqudity pool.
+Swaps can be made using the TinyMan web applicaition or using the TinyMan Python SDK.
+Swaps initiate an ASA transfer from the swapper's wallet and the liquidity pool.
+
+# Links
+##################
+Algoand Foundation Website: https://algorand.foundation/
+Algorand Foundation GitHub: https://github.com/algorandfoundation
+Choice Coin Website: https://choice-coin.com/
+Choice Coin GitHub: https://github.com/ChoiceCoin
+TinyMan Website: https://tinyman.org/
+TinyMan GitHub: https://github.com/tinymanorg
