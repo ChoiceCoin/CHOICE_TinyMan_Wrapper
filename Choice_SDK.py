@@ -1,6 +1,6 @@
 
 #Type python Choice_SDK.py in a directory with all the runsteps to run this file
-
+#Be sure to enter your mnemonic and address in lines 9-10 beforehand. 
 from tinyman.v1.client import TinymanMainnetClient
 from algosdk.v2client import algod
 from algosdk import account, encoding, mnemonic,transaction
@@ -116,7 +116,7 @@ def choice_for_OPUL():
         OPUL = client.fetch_asset(287867876)
         pool = client.fetch_pool(Choice, OPUL)
 
-        quote = pool.fetch_fixed_input_swap_quote(YLDY(1_000_000), slippage=0.01)
+        quote = pool.fetch_fixed_input_swap_quote(OPUL(1_000_000), slippage=0.01)
         print(quote)
         print(f'Choice per OPUL: {quote.price * 10000}')
         print(f'Choice per OPUL (worst case): {quote.price_with_slippage * 10000}')
@@ -147,7 +147,7 @@ def choice_for_TACO():
         TACO = client.fetch_asset(329110405)
         pool = client.fetch_pool(Choice, TACO)
 
-        quote = pool.fetch_fixed_input_swap_quote(YLDY(1_000_000), slippage=0.01)
+        quote = pool.fetch_fixed_input_swap_quote(TACO(1_000_000), slippage=0.01)
         print(quote)
         print(f'Choice per TACO: {quote.price * 10000}')
         print(f'Choice per TACO (worst case): {quote.price_with_slippage * 10000}')
@@ -176,17 +176,47 @@ def choice_for_TACO():
 def choice_for_GEMS():
         Choice = client.fetch_asset(297995609)
         GEMS = client.fetch_asset(230946361)
-        pool = client.fetch_pool(Choice, TACO)
+        pool = client.fetch_pool(Choice, GEMS)
 
         quote = pool.fetch_fixed_input_swap_quote(GEMS(1_000_000), slippage=0.01)
         print(quote)
-        print(f'Choice per TACO: {quote.price * 10000}')
-        print(f'Choice per TACO (worst case): {quote.price_with_slippage * 10000}')
+        print(f'Choice per GEMS: {quote.price * 10000}')
+        print(f'Choice per GEMS (worst case): {quote.price_with_slippage * 10000}')
         print("Do you still want to go through this transaction? Type Y for 'Yes' and N for 'No'")
         binary = input()
         if binary == "Y":
-            new = int(input("How much TACO do you want to spend? ")) * 1000000
-            quote = pool.fetch_fixed_input_swap_quote(USDC(new), slippage=0.01)
+            new = int(input("How much GEMS do you want to spend? ")) * 1000000
+            quote = pool.fetch_fixed_input_swap_quote(GEMS(new), slippage=0.01)
+            print(f'Swapping {quote.amount_in} to {quote.amount_out_with_slippage}')
+            transaction_group = pool.prepare_swap_transactions_from_quote(quote)
+                # Sign the group with our key
+            transaction_group.sign_with_private_key(address, private_key)
+                # Submit transactions to the network and wait for confirmation
+            result = client.submit(transaction_group, wait=True)
+
+        # Check if any excess remaining after the swap
+        excess = pool.fetch_excess_amounts()
+        if Choice in excess:
+            amount = excess[Choice]
+            print(f'Excess: {amount}')
+            if amount > 1_000_000:
+                transaction_group = pool.prepare_redeem_transactions(amount)
+                transaction_group.sign_with_private_key(address, private_key)
+                result = client.submit(transaction_group, wait=True)
+   def choice_for_AKITA():
+        Choice = client.fetch_asset(297995609)
+        AKITA = client.fetch_asset(384303832)
+        pool = client.fetch_pool(Choice, TACO)
+
+        quote = pool.fetch_fixed_input_swap_quote(AKITA(1_000_000), slippage=0.01)
+        print(quote)
+        print(f'Choice per AKITA: {quote.price * 10000}')
+        print(f'Choice per AKITA (worst case): {quote.price_with_slippage * 10000}')
+        print("Do you still want to go through this transaction? Type Y for 'Yes' and N for 'No'")
+        binary = input()
+        if binary == "Y":
+            new = int(input("How much AKITA do you want to spend? ")) * 1000000
+            quote = pool.fetch_fixed_input_swap_quote(AKITA(new), slippage=0.01)
             print(f'Swapping {quote.amount_in} to {quote.amount_out_with_slippage}')
             transaction_group = pool.prepare_swap_transactions_from_quote(quote)
                 # Sign the group with our key
@@ -219,3 +249,5 @@ while user_input == "Go":
         choice_for_OPUL()
     elif user == 'TACO':
         choice_for_TACO()
+    elif user == 'AKITA':
+        choice_for_AKITA()
