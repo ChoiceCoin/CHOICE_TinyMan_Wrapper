@@ -1,5 +1,5 @@
 # CHOICE_TinyMan_Wrapper
-A wrapper that allows users to acquire Choice Coin directly through their Terminal using ALGO and various Algorand Standard Assets (ASAs). This wrapper leverages the TinyMan Python SDK.
+A wrapper that allows users to interact with TinyMan Choice pools using Choice and various Algorand Standard Assets (ASAs), using the TinyMan-SDK.
 
 First, make sure that you have Python installed and a virtual environment configured. Download Python here: https://www.python.org/downloads/, and read about creating a new virtual environment here: https://docs.python.org/3/library/venv.html. 
 
