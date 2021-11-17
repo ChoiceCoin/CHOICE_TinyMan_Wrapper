@@ -330,7 +330,7 @@ def choice_for_ACORN():
 user_input = "Go"
 while user_input == "Go":
     # Fix this to add extra ASAs
-    print("What swaps do you want to make with Choice? \n 1. Type 'ALGO' to trade for Choice with Algo. \n 2. Type 'USDC' to trade for Choice with USDC. \n 3. Type 'YLDY' to trade for Choice with Yieldy. \n 4. Type 'OPUL' to trade for Choice with Opulous \n 5. Type 'TACO' to trade for Choice with TACO \n 6. Type 'HDL' to trade for Choice with HDL \n 7. Type 'comand' to trade Choice with command \n 8. Type 'ACORN' to trade Choice with ACORN \n 9. Type 'Stop' to stop the program.)
+    print("What swaps do you want to make with Choice? \n 1. Type 'ALGO' to trade for Choice with Algo. \n 2. Type 'USDC' to trade for Choice with USDC. \n 3. Type 'YLDY' to trade for Choice with Yieldy. \n 4. Type 'OPUL' to trade for Choice with Opulous \n 5. Type 'TACO' to trade for Choice with TACO \n 6. Type 'HDL' to trade for Choice with HDL \n 7. Type 'comand' to trade Choice with command \n 8. Type 'ACORN' to trade Choice with ACORN \n 9. Type 'Stop' to stop the program.")
     user = input()
     if user == "Stop":
         user_input = 'Stop'
