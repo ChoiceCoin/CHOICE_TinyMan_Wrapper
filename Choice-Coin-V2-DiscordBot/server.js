@@ -4,7 +4,7 @@ import express from 'express';
 
 const app = express();
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3500;
 
 import dotenv from 'dotenv'
  dotenv.config();
@@ -26,6 +26,7 @@ let algo_price;
 let yieldly_price;
 let algostake_price;
 let defly_price;
+let tiny_price;
 
 
 app.get('/', (req,res) => {
@@ -33,8 +34,8 @@ app.get('/', (req,res) => {
 })
 
 // getting choice price from liveCoinWatch API
-const getChoicePrice =  () => {
- fetch("https://api.livecoinwatch.com/coins/single", {
+const getChoicePrice =  async () => {
+ await fetch("https://api.livecoinwatch.com/coins/single", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -47,18 +48,17 @@ const getChoicePrice =  () => {
         }),
       }).then(resp => resp.json())
       .then(data => {
-        choice_price = data.rate.toFixed(8)
+        choice_price = data.rate.toFixed(6)
         choice_market_cap = data.cap
         
       })
       
 }
 
-getChoicePrice() 
 
 //getting algo price from LiveCoinWatch API
-const getAlgoPrice = () => {
-    fetch("https://api.livecoinwatch.com/coins/single", {
+const getAlgoPrice = async () => {
+    await fetch("https://api.livecoinwatch.com/coins/single", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -76,12 +76,12 @@ const getAlgoPrice = () => {
       })
 }
 
-getAlgoPrice()
+
 
 // get yieldy price
 
-const getYieldlyPrice = () => {
-    fetch("https://api.livecoinwatch.com/coins/single", {
+const getYieldlyPrice = async () => {
+    await fetch("https://api.livecoinwatch.com/coins/single", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -99,12 +99,12 @@ const getYieldlyPrice = () => {
       })
 }
 
-getYieldlyPrice()
+
 
 // get algostake price
 
-const getSTKEPrice = () => {
-    fetch("https://api.livecoinwatch.com/coins/single", {
+const getSTKEPrice = async () => {
+    await fetch("https://api.livecoinwatch.com/coins/single", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -117,16 +117,15 @@ const getSTKEPrice = () => {
         }),
       }).then(resp => resp.json())
       .then(data => {
-        algostake_price = data.rate.toFixed(7)
+        algostake_price = data.rate.toFixed(6)
         
       })
 }
 
-getSTKEPrice()
 
 // get defly price
-const getDeflyPrice = () => {
-    fetch("https://api.livecoinwatch.com/coins/single", {
+const getDeflyPrice = async () => {
+    await fetch("https://api.livecoinwatch.com/coins/single", {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -139,13 +138,31 @@ const getDeflyPrice = () => {
         }),
       }).then(resp => resp.json())
       .then(data => {
-        defly_price = data.rate.toFixed(7)
+        defly_price = data.rate.toFixed(6)
         
       })
 }
 
-getDeflyPrice()
+//get tinychart price
 
+const getTinyChartPrice = async () => {
+  await fetch("https://api.livecoinwatch.com/coins/single", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        "x-api-key": process.env.API_KEY,
+      },
+      body: JSON.stringify({
+        currency: "USD",
+        code: "TINY",
+        meta: true,
+      }),
+    }).then(resp => resp.json())
+    .then(data => {
+      tiny_price = data.rate.toFixed(6)
+      
+    })
+}
 
 
 
@@ -162,31 +179,35 @@ client.on('messageCreate', async (msg) => {
                  await  msg.reply('Choice Coin is an Algorand Standard Asset that powers Decentralized Decisions, a voting and governance software built directly on the Algorand Blockchain, for more infomation check https://choice-coin.com/')    
              }
              if(msg.content.toLowerCase() === '!yieldly' || msg.content.toLowerCase() === '!yieldly_price') {           
-                getYieldlyPrice()
+                await getYieldlyPrice()
                 await  msg.reply(`Hi 👋🏻 , Yieldly Price is : $${yieldly_price}`)    
             }
             if(msg.content.toLowerCase() === '!defly' || msg.content.toLowerCase() === '!defly_price') {           
-                getDeflyPrice()
+                await getDeflyPrice()
                 await  msg.reply(`Hi 👋🏻 , Defly Price is : $${defly_price}`)    
             }
             if(msg.content.toLowerCase() === '!algostake' || msg.content.toLowerCase() === '!algostake_price') {           
-                getSTKEPrice()
+                await getSTKEPrice()
                 await  msg.reply(`Hi 👋🏻 , AlgoStake Price is : $${algostake_price}`)    
             }
              if(msg.content.toLowerCase() === '!github' || msg.content.toLowerCase() === 'github') {           
                 await  msg.reply('Here you go 🤌🏽, This is Choice Coin Github URL - https://github.com/ChoiceCoin. Take a look at the repositories, contributions are welcome')    
             }
            if(msg.content.toLowerCase() === '!choice_price' || msg.content.toLowerCase() === '!choice') {           
-              getChoicePrice() 
+              await getChoicePrice() 
                await  msg.reply(`Hi 👋🏻 , Choice Coin Price is : $${choice_price}`)    
            }
            
-           if(msg.content.toLowerCase() === '!algo_price' || msg.content.toLowerCase() === '!algo') {           
-              getAlgoPrice()
-             await  msg.reply(`Hi 👋🏻 , Algo Price is : $${algo_price}`)    
+           if(msg.content.toLowerCase() === '!tiny_price' || msg.content.toLowerCase() === '!tiny') {           
+              await getTinyChartPrice()
+             await  msg.reply(`Hi 👋🏻 , Tiny Chart Price is : $${tiny_price}`)    
          }
+         if(msg.content.toLowerCase() === '!algo_price' || msg.content.toLowerCase() === '!algo') {           
+          await getAlgoPrice()
+         await  msg.reply(`Hi 👋🏻 , Algo Price is : $${algo_price}`)    
+     }
            if(msg.content.toLowerCase() === '!choice_market_cap' || msg.content.toLowerCase() === '!market_cap') {
-            getChoicePrice() 
+            await getChoicePrice() 
             await  msg.reply(`Hi 👋🏻 , Choice Coin Market Cap is : $${choice_market_cap}`) 
            }
         }
